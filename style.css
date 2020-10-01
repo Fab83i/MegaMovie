@@ -1,0 +1,143 @@
+body{
+    padding: 0;
+    margin: 0;
+    border-collapse: collapse;
+    font-family: 'Lato', sans-serif;
+}
+
+#header{
+    display: flex;
+    background-color: black;
+    height: 100px;
+    padding: 30px;
+    text-align: center;
+}
+
+#title a#title_id{
+    color: white;
+    font-size: 40px;
+    margin-top: 2%;
+    text-decoration: none;
+}
+
+.nav{
+    margin-left: 60px;
+    font-size: 25px;
+    color: white;
+    margin-top: 2%;
+    text-decoration: none;
+}
+
+.nav:hover{
+    cursor: pointer;
+}
+
+
+#container{
+    width: 30%;
+    height: 30%;
+    text-align: center;
+    border: 1px solid;
+    border-radius: 10px;
+    padding: 10px;
+    margin-left: auto;
+    margin-top: 2%;
+    background-color: white;
+
+}
+
+#result{
+    display: flex;
+    flex-wrap: wrap;
+    background-color: deepskyblue;
+    justify-content: space-around;
+}
+
+
+
+
+.trend{
+    font-size: 40px;
+    font-style: italic;
+    background-color: deepskyblue;
+    color: white;
+    padding-top: 2%;
+    padding-bottom: 2%;
+    padding-left: 10%;
+}
+
+
+
+.poster{
+    width: 300px;
+    height: 400px;
+    margin: 5px;
+    border-radius: 10px;
+
+}
+
+.wrapProduct{
+    text-align: center;
+    width: 320px;
+    padding: 5px;
+    border-radius: 10px;
+    background-color: cornflowerblue;
+    margin: 1%;
+}
+
+.wrapProduct:hover{
+    cursor: pointer;
+}
+
+.wrapProduct p{
+    text-align: center;
+}
+
+#chosenProduct img#poster_path{
+    margin: 30px auto;
+    display: block;
+
+}
+
+.movieTitle{
+    font-size: 18px;
+    color: white;
+
+}
+
+#chosenTitle{
+    font-size: 40px;
+    color: white;
+    display: block;
+    text-align: center;
+
+}
+
+#chosenDesc{
+    background-color: white;
+    width: 70%;
+    margin: auto;
+    text-align: justify;
+    border: 8px solid cornflowerblue;
+    border-radius: 10px;
+    padding: 20px;
+}
+
+#average_id{
+    text-align: center;
+    font-size: 50px;
+    color: darkred;
+
+}
+
+#star_id{
+    width: 40px;
+    margin-right: 6px;
+}
+
+#poster_path{
+    border-radius: 10px;
+    padding: 10px;
+    background-color: cornflowerblue;
+}
+
