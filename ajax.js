@@ -95,7 +95,7 @@ $(document).ready(function(){
 
     /*
     *  Utilisation de la touche entrée (code 13) pour valider l'input de recherche
-     */
+    */
 
     $(document).on('keypress',function(e) {
 

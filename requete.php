@@ -94,12 +94,14 @@ if (isset($_POST['research'])){
     $responseJson = json_decode($response, true);
 
     for($i=0; $i<count($responseJson['results']);$i++){
-        if ($responseJson['results'][$i]['poster_path'] != null){
+        if ($responseJson['results'][$i]['poster_path'] != null || $responseJson['results'][$i]['profile_path']  != null){
             $idMovie = $responseJson['results'][$i]['id'];
             echo '<div class="wrapProduct" id="'.$idMovie.'">';
             echo '<img class="poster" src="http://image.tmdb.org/t/p/w500'.($responseJson['results'][$i]['poster_path']).'" alt="test">';
+            echo '<img class="poster actors" src="http://image.tmdb.org/t/p/w500'.($responseJson['results'][$i]['profile_path']).'" alt="test">';
             echo '<p class="movieTitle">'.$responseJson['results'][$i]['original_title'].'</p>';
-            echo '<p class="movieTitle">'.$responseJson['results'][$i]['original_name'].'</p>';
+            //echo '<p class="movieTitle">'.$responseJson['results'][$i]['original_name'].'</p>';
+            echo '<p class="movieTitle actors">'.$responseJson['results'][$i]['name'].'</p>';
             echo '</div>';
         }
     }
