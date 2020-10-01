@@ -10,11 +10,15 @@
  *
  * A FAIRE
  *
+ * Trouver une autre solution pour différencier movies, TV shows et Actors. Car "raised by wolf" ne vérifie pas la condition
+ *
  * Ajouter une section avis pour laisser des avis sur un item.
  * Afficher tous les avis laisser pour un item sur sa page.
  *
  *
  */
+
+
 
 /*
  * Affichage des tendances du jour à l'arrivée sur le site Web. Tendance Movies et TV confondues.

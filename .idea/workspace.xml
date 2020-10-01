@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="1d1ac4e5-3ad2-48cc-8715-6b01c78f73ec" name="Default Changelist" comment="">
+    <list default="true" id="1d1ac4e5-3ad2-48cc-8715-6b01c78f73ec" name="Default Changelist" comment="Modifs banales">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ajax.js" beforeDir="false" afterPath="$PROJECT_DIR$/ajax.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/requete.php" beforeDir="false" afterPath="$PROJECT_DIR$/requete.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -55,7 +54,7 @@
       <option name="presentableId" value="Default" />
       <updated>1601025105476</updated>
       <workItem from="1601025106539" duration="32443000" />
-      <workItem from="1601393930418" duration="20049000" />
+      <workItem from="1601393930418" duration="21210000" />
     </task>
     <task id="LOCAL-00001" summary="Modification de la section research">
       <created>1601557914846</created>
@@ -64,7 +63,14 @@
       <option name="project" value="LOCAL" />
       <updated>1601557914846</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Modifs banales">
+      <created>1601559654434</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1601559654434</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -72,7 +78,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Modification de la section research" />
-    <option name="LAST_COMMIT_MESSAGE" value="Modification de la section research" />
+    <MESSAGE value="Modifs banales" />
+    <option name="LAST_COMMIT_MESSAGE" value="Modifs banales" />
   </component>
   <component name="WindowStateProjectService">
     <state x="593" y="340" key="Github.ShareDialog" timestamp="1601554531528">
