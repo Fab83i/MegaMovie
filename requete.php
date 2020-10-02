@@ -10,7 +10,7 @@
  *
  * A FAIRE
  *
- * Trouver une autre solution pour différencier movies, TV shows et Actors. Car "raised by wolf" ne vérifie pas la condition
+ * Rendre la barre de nav responsive
  *
  * Ajouter une section avis pour laisser des avis sur un item.
  * Afficher tous les avis laisser pour un item sur sa page.
@@ -26,17 +26,19 @@
 
 if (isset($_GET['launch'])){
 
+    // récupère les tendances du jour via l'API
     $requestApi = 'https://api.themoviedb.org/3/trending/all/day?api_key=0d34be9b15e78c94a6d41f1872e62f86';
     $response = file_get_contents($requestApi);
     $responseJson = json_decode($response, true);
 
+    // Affiche toutes les tendances à l'écran
     for($i=0; $i<count($responseJson['results']);$i++){
         if ($responseJson['results'][$i]['poster_path'] != null){
             $idMovie = $responseJson['results'][$i]['id'];
-            echo '<div class="wrapProduct" id="'.$idMovie.'">';
-            echo '<img class="poster" src="http://image.tmdb.org/t/p/w500'.($responseJson['results'][$i]['poster_path']).'" alt="test">';
-            echo '<p class="movieTitle">'.$responseJson['results'][$i]['original_title'].'</p>';
-            echo '<p class="movieTitle">'.$responseJson['results'][$i]['original_name'].'</p>';
+            echo '<div class="wrapProduct allTrend" id="'.$idMovie.'">';
+            echo '<img class="poster allTrend" src="http://image.tmdb.org/t/p/w500'.($responseJson['results'][$i]['poster_path']).'" alt="test">';
+            echo '<p class="movieTitle allTrend">'.$responseJson['results'][$i]['original_title'].'</p>';
+            echo '<p class="movieTitle allTrend">'.$responseJson['results'][$i]['original_name'].'</p>';
             echo '</div>';
         }
     }
@@ -46,18 +48,27 @@ if (isset($_GET['launch'])){
  * Condition sur le clic d'une catégorie du menu. Afin d'afficher respectivement movies, TV ou Actors
  * Attention à la syntaxe, le nom d'un TV et d'un movie n'est pas exprimé sous le même attribut. original_title ou original_name.
  *
+ *
+ * UPDATE 02/10/2020
+ * Séparation des quatre catégories pour plus de clarté. Vérification avec le $_GET pour choisir une catégorie.
+ *
  * */
 
 if (isset($_GET['choose'])) {
 
+    // requête tendance avec paramètre de catégorie $_GET renvoie movie, actor ou Tv
     $requestApi = 'https://api.themoviedb.org/3/trending/' . $_GET['choose'] . '/day?api_key=0d34be9b15e78c94a6d41f1872e62f86';
     $response = file_get_contents($requestApi);
     $responseJson = json_decode($response, true);
 
+    // Requête tendance pour les acteurs
+    $requestApiActor = 'https://api.themoviedb.org/3/person/popular?api_key=0d34be9b15e78c94a6d41f1872e62f86';
+    $responseActor = file_get_contents($requestApiActor);
+    $responseJsonActor = json_decode($responseActor, true);
+
+
+    // On regarde sur quelle catégorie à cliqué le user et on renvoie en conséquence
     if ($_GET['choose'] == 'actor') {
-        $requestApiActor = 'https://api.themoviedb.org/3/person/popular?api_key=0d34be9b15e78c94a6d41f1872e62f86';
-        $responseActor = file_get_contents($requestApiActor);
-        $responseJsonActor = json_decode($responseActor, true);
 
         for ($i = 0; $i < count($responseJsonActor['results']); $i++) {
             if ($responseJsonActor['results'][$i]['profile_path'] != null) {
@@ -69,15 +80,39 @@ if (isset($_GET['choose'])) {
             }
         }
     }
-    else {
+    if ($_GET['choose'] == 'all') {
+
+        for($i=0; $i<count($responseJson['results']);$i++){
+            if ($responseJson['results'][$i]['poster_path'] != null){
+                $idMovie = $responseJson['results'][$i]['id'];
+                echo '<div class="wrapProduct allTrend" id="'.$idMovie.'">';
+                echo '<img class="poster allTrend" src="http://image.tmdb.org/t/p/w500'.($responseJson['results'][$i]['poster_path']).'" alt="test">';
+                echo '<p class="movieTitle allTrend">'.$responseJson['results'][$i]['original_title'].'</p>';
+                echo '<p class="movieTitle allTrend">'.$responseJson['results'][$i]['original_name'].'</p>';
+                echo '</div>';
+            }
+        }
+    }
+    if ($_GET['choose'] == 'tv') {
+
+        for ($i = 0; $i < count($responseJson['results']); $i++) {
+            if ($responseJson['results'][$i]['poster_path'] != null) {
+                $idTv = $responseJson['results'][$i]['id'];
+                echo '<div class="wrapProduct tv" id="' . $idTv . '">';
+                echo '<img class="poster tv" src="http://image.tmdb.org/t/p/w500' . ($responseJson['results'][$i]['poster_path']) . '" alt="test">';
+                echo '<p class="movieTitle tv">' . $responseJson['results'][$i]['original_name'] . '</p>';
+                echo '</div>';
+            }
+        }
+    }
+    if ($_GET['choose'] == 'movie') {
 
         for ($i = 0; $i < count($responseJson['results']); $i++) {
             if ($responseJson['results'][$i]['poster_path'] != null) {
                 $idMovie = $responseJson['results'][$i]['id'];
-                echo '<div class="wrapProduct" id="' . $idMovie . '">';
-                echo '<img class="poster" src="http://image.tmdb.org/t/p/w500' . ($responseJson['results'][$i]['poster_path']) . '" alt="test">';
-                echo '<p class="movieTitle">' . $responseJson['results'][$i]['original_title'] . '</p>';
-                echo '<p class="movieTitle">' . $responseJson['results'][$i]['original_name'] . '</p>';
+                echo '<div class="wrapProduct movie" id="' . $idMovie . '">';
+                echo '<img class="poster movie" src="http://image.tmdb.org/t/p/w500' . ($responseJson['results'][$i]['poster_path']) . '" alt="test">';
+                echo '<p class="movieTitle movie">' . $responseJson['results'][$i]['original_title'] . '</p>';
                 echo '</div>';
             }
         }
@@ -99,13 +134,17 @@ if (isset($_POST['research'])){
 
     for($i=0; $i<count($responseJson['results']);$i++){
         if ($responseJson['results'][$i]['poster_path'] != null || $responseJson['results'][$i]['profile_path']  != null){
-            $idMovie = $responseJson['results'][$i]['id'];
-            echo '<div class="wrapProduct" id="'.$idMovie.'">';
-            echo '<img class="poster" src="http://image.tmdb.org/t/p/w500'.($responseJson['results'][$i]['poster_path']).'" alt="test">';
-            echo '<img class="poster actors" src="http://image.tmdb.org/t/p/w500'.($responseJson['results'][$i]['profile_path']).'" alt="test">';
+            $idItem = $responseJson['results'][$i]['id'];
+            echo '<div class="wrapProduct" id="'.$idItem.'">';
+            if($responseJson['results'][$i]['poster_path'] == null){ // On vérifie si l'affiche est nulle pour afficher le celle correspondante
+                echo '<img class="poster actors" src="http://image.tmdb.org/t/p/w500'.($responseJson['results'][$i]['profile_path']).'" alt="test">';
+            }
+            else{
+                echo '<img class="poster" src="http://image.tmdb.org/t/p/w500'.($responseJson['results'][$i]['poster_path']).'" alt="test">';
+
+            }
             echo '<p class="movieTitle">'.$responseJson['results'][$i]['original_title'].'</p>';
-            //echo '<p class="movieTitle">'.$responseJson['results'][$i]['original_name'].'</p>';
-            echo '<p class="movieTitle actors">'.$responseJson['results'][$i]['name'].'</p>';
+            echo '<p class="movieTitle">'.$responseJson['results'][$i]['name'].'</p>';
             echo '</div>';
         }
     }
@@ -162,12 +201,12 @@ if (isset($_POST['selectedId'])){
     // affichage des infos actors
     if (isset($_POST['resultId'])){
 
-        $content  = '<div style="display: flex; flex-wrap: wrap; justify-content: space-around; padding-bottom: 30px;margin-bottom: 30px; border-bottom: 8px solid">';
+        $content  = '<div style="display: flex; flex-wrap: wrap; justify-content: space-around; padding-bottom: 30px;margin-bottom: 30px; margin-top: 30px; border-bottom: 8px solid">';
         $content .= '<div id="divLeft">';
         $content .= '<img class="poster" src="http://image.tmdb.org/t/p/w500'.$responseJsonSelectedActor['profile_path'].'" alt="test">';
         $content .= '</div>';
         $content .= '<div id="divRight" style="width: 50%">';
-        $content .= '<table style="margin: 20px 20px; font-size: 20px"><tr class="actor_content"><td style="width: 150px">Name : </td><td>' . $responseJsonSelectedActor['name'] . '</td></tr><tr class="actor_content"><td style="width: 150px">Birth date : </td><td>'.$responseJsonSelectedActor['birthday'].'</td></tr><tr class="actor_content"><td style="width: 150px">Biography : </td><td>'.$responseJsonSelectedActor['biography'].'</td></tr></table>';
+        $content .= '<table style="margin: 20px 20px; border: 3px solid white; padding: 15px; font-size: 20px"><tr class="actor_content"><td style="width: 150px">Name : </td><td>' . $responseJsonSelectedActor['name'] . '</td></tr><tr class="actor_content"><td style="width: 150px">Birth date : </td><td>'.$responseJsonSelectedActor['birthday'].'</td></tr><tr class="actor_content"><td style="width: 150px">Biography : </td><td>'.$responseJsonSelectedActor['biography'].'</td></tr></table>';
         $content .= '</div>';
         $content .= '</div>';
 

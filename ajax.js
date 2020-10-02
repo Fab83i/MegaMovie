@@ -3,9 +3,9 @@ $(document).ready(function(){
     $('#dailyTrendMovie').hide();
     $('#dailyTrendTv').hide();
     $('#dailyTrendActor').hide();
-    $('#known_for').hide();
     $('#reseachResult').hide();
 
+    // récupère les tendances du jour au lancement du site
     $.get(
         'requete.php',
         {
@@ -18,18 +18,21 @@ $(document).ready(function(){
     );
 
 
-
+    /*
+    *  click sur le bouton 'Go' pour éxécuter la requête de recherche
+    */
     $('#submit').click(function(){
 
         $('div').remove('#dailyTrend');     // Supprime la div contenant le texte 'Tendance du jour' lors du click sur Go
+        var researchParam = $('#search').val();
         var inputParam = $('#search').val().replaceAll(' ','/');
 
         $.post(
-            'requete.php',      // Fichier cible côté serveur
+            'requete.php',
             {
-                research : inputParam     // Récupération de la valeur saisie dans le formulaire html
+                research : inputParam
             },
-            function(data){         // Fonction callback avec les données renvoyées par jQuery en paramètre
+            function(data){
                 $('#result').html(data);
 
                 $('#reseachResult').show();
@@ -37,73 +40,21 @@ $(document).ready(function(){
                 $('#dailyTrendActor').hide();
                 $('#dailyTrendMovie').hide();
                 $('#dailyTrendAll').hide();
-                $('#known_for').hide();
+                document.getElementById('researchEnter').innerHTML= researchParam;
             },
-            'html'           // Format des données reçues
+            'html'
         );
     });
-
-
-
-    $('.nav').click(function(){
-
-        if($(this).attr('id') == 'movie'){
-            $('#dailyTrendMovie').show();
-            $('#dailyTrendTv').hide();
-            $('#dailyTrendAll').hide();
-            $('#dailyTrendActor').hide();
-            $('#known_for').hide();
-            $('#reseachResult').hide();
-        }
-        if ($(this).attr('id') == 'all'){
-            $('#dailyTrendTv').hide();
-            $('#dailyTrendMovie').hide();
-            $('#dailyTrendActor').hide();
-            $('#dailyTrendAll').show();
-            $('#known_for').hide();
-            $('#reseachResult').hide();
-        }
-        if($(this).attr('id') == 'actor'){
-            $('#dailyTrendTv').hide();
-            $('#dailyTrendMovie').hide();
-            $('#dailyTrendAll').hide();
-            $('#dailyTrendActor').show();
-            $('#known_for').hide();
-            $('#reseachResult').hide();
-        }
-        if($(this).attr('id') == 'tv'){
-            $('#dailyTrendTv').show();
-            $('#dailyTrendActor').hide();
-            $('#dailyTrendMovie').hide();
-            $('#dailyTrendAll').hide();
-            $('#known_for').hide();
-            $('#reseachResult').hide();
-        }
-
-        $.get(
-            'requete.php',          // Fichier cible côté serveur
-            {
-                choose : $(this).attr('id')      // Récupération de la valeur saisie dans le formulaire html
-            },
-            function(data){         // Fonction callback avec les données renvoyées par jQuery en paramètre
-                $('#result').html(data);
-            },
-            'html'      // Format des données reçues
-        );
-    });
-
-
     /*
     *  Utilisation de la touche entrée (code 13) pour valider l'input de recherche
     */
-
     $(document).on('keypress',function(e) {
 
 
         if(e.which == 13) {
-
             var researchParam = $('#search').val();
             var inputParam = $('#search').val().replaceAll(' ','/');
+
             $.post(
                 'requete.php',  // Fichier cible côté serveur
                 {
@@ -116,13 +67,9 @@ $(document).ready(function(){
                     $('#dailyTrendActor').hide();
                     $('#dailyTrendMovie').hide();
                     $('#dailyTrendAll').hide();
-                    $('#known_for').hide();
                     $('#reseachResult').show();
                     $('#search').val('');
-
                     document.getElementById('researchEnter').innerHTML= researchParam;
-
-
                 },
                 'html'        // Format des données reçues
             );
@@ -130,28 +77,71 @@ $(document).ready(function(){
     });
 
 
+
+    $('.nav').click(function(){
+
+        if($(this).attr('id') == 'movie'){
+            $('#dailyTrendMovie').show();
+            $('#dailyTrendTv').hide();
+            $('#dailyTrendAll').hide();
+            $('#dailyTrendActor').hide();
+            $('#reseachResult').hide();
+        }
+        if ($(this).attr('id') == 'all'){
+            $('#dailyTrendTv').hide();
+            $('#dailyTrendMovie').hide();
+            $('#dailyTrendActor').hide();
+            $('#dailyTrendAll').show();
+            $('#reseachResult').hide();
+        }
+        if($(this).attr('id') == 'actor'){
+            $('#dailyTrendTv').hide();
+            $('#dailyTrendMovie').hide();
+            $('#dailyTrendAll').hide();
+            $('#dailyTrendActor').show();
+            $('#reseachResult').hide();
+        }
+        if($(this).attr('id') == 'tv'){
+            $('#dailyTrendTv').show();
+            $('#dailyTrendActor').hide();
+            $('#dailyTrendMovie').hide();
+            $('#dailyTrendAll').hide();
+            $('#reseachResult').hide();
+        }
+
+        $.get(
+            'requete.php',  // Fichier cible côté serveur
+            {
+                choose : $(this).attr('id')// Récupération de la valeur saisie dans le formulaire html
+            },
+            function(data){ // Fonction callback avec les données renvoyées par jQuery en paramètre
+                $('#result').html(data);
+            },
+            'html' // Format des données reçues
+        );
+    });
+
+
+
     $(document).on('click', '.wrapProduct', function(){
 
+        alert($(this).attr('class'));
         $.post(
             'requete.php',               // Fichier cible côté serveur
             {
                 selectedId : $(this).attr('id'),         // Variable passée en param pour la selection dans requete.php
-                classActor : $(this).attr('class'),
+                selectedClass : $(this).attr('class'),
                 resultId : $(this).children('p').attr('id')
             },
             function (data){               // fonction callback à effectuer au retour de la requête
                 $('#result').html(data);           // ajoute à la div #result l'html revenant de requete.php
                 $('div').remove('#dailyTrend');         // Supprime la div contenant le texte 'Tendance du jour' lors keypress 13
                 $('html,body').animate({scrollTop: 0}, 'slow');
-
-                $('#known_for').show();
                 $('#dailyTrendTv').hide();
                 $('#dailyTrendActor').hide();
                 $('#dailyTrendMovie').hide();
                 $('#dailyTrendAll').hide();
                 $('#reseachResult').hide();
-
-
             },
             'html'
         );
