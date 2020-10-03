@@ -1,10 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="1d1ac4e5-3ad2-48cc-8715-6b01c78f73ec" name="Default Changelist" comment="Problème de différenciation des items. Raised by wolf ne vérifie pas la condition.&#10;Tout le reste fonctionne">
+    <list default="true" id="1d1ac4e5-3ad2-48cc-8715-6b01c78f73ec" name="Default Changelist" comment="réglage de détails&#10;- mise à jour des champs après clic sur Go&#10;- suppression du known_for&#10;- différenciation entre les différentes catégories&#10;- code un peu nettoyé et organisé">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ajax.js" beforeDir="false" afterPath="$PROJECT_DIR$/ajax.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/requete.php" beforeDir="false" afterPath="$PROJECT_DIR$/requete.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -69,7 +86,10 @@
       <workItem from="1601025106539" duration="32443000" />
       <workItem from="1601393930418" duration="21500000" />
       <workItem from="1601619305208" duration="613000" />
-      <workItem from="1601620315773" duration="3704000" />
+      <workItem from="1601620315773" duration="6360000" />
+      <workItem from="1601630135280" duration="6295000" />
+      <workItem from="1601642769609" duration="1261000" />
+      <workItem from="1601727039077" duration="3609000" />
     </task>
     <task id="LOCAL-00001" summary="Modification de la section research">
       <created>1601557914846</created>
@@ -92,17 +112,37 @@
       <option name="project" value="LOCAL" />
       <updated>1601566473093</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="réglage de détails&#10;- mise à jour des champs après clic sur Go&#10;- suppression du known_for&#10;- différenciation entre les différentes catégories&#10;- code un peu nettoyé et organisé">
+      <created>1601624822769</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1601624822769</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Modification de la section research" />
     <MESSAGE value="Modifs banales" />
     <MESSAGE value="Problème de différenciation des items. Raised by wolf ne vérifie pas la condition.&#10;Tout le reste fonctionne" />
-    <option name="LAST_COMMIT_MESSAGE" value="Problème de différenciation des items. Raised by wolf ne vérifie pas la condition.&#10;Tout le reste fonctionne" />
+    <MESSAGE value="réglage de détails&#10;- mise à jour des champs après clic sur Go&#10;- suppression du known_for&#10;- différenciation entre les différentes catégories&#10;- code un peu nettoyé et organisé" />
+    <option name="LAST_COMMIT_MESSAGE" value="réglage de détails&#10;- mise à jour des champs après clic sur Go&#10;- suppression du known_for&#10;- différenciation entre les différentes catégories&#10;- code un peu nettoyé et organisé" />
   </component>
   <component name="WindowStateProjectService">
     <state x="593" y="340" key="Github.ShareDialog" timestamp="1601554531528">
@@ -117,20 +157,23 @@
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state x="539" y="380" key="NewPhpFileDialog/0.0.1440.900@0.0.1440.900" timestamp="1601036086394" />
-    <state x="320" y="176" key="Vcs.Push.Dialog.v2" timestamp="1601566491078">
-      <screen x="0" y="23" width="1440" height="827" />
+    <state x="320" y="177" key="Vcs.Push.Dialog.v2" timestamp="1601624845074">
+      <screen x="0" y="23" width="1440" height="830" />
     </state>
     <state x="320" y="176" key="Vcs.Push.Dialog.v2/0.23.1440.827@0.23.1440.827" timestamp="1601566491078" />
     <state x="320" y="176" key="Vcs.Push.Dialog.v2/0.23.1440.828@0.23.1440.828" timestamp="1601557933699" />
+    <state x="320" y="177" key="Vcs.Push.Dialog.v2/0.23.1440.830@0.23.1440.830" timestamp="1601624845074" />
     <state x="518" y="356" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1601566508604">
       <screen x="0" y="23" width="1440" height="827" />
     </state>
     <state x="518" y="356" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.23.1440.827@0.23.1440.827" timestamp="1601566508604" />
     <state x="518" y="357" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.23.1440.829@0.23.1440.829" timestamp="1601554892600" />
-    <state x="418" y="59" width="604" height="758" key="find.popup" timestamp="1601555302186">
-      <screen x="0" y="23" width="1440" height="829" />
+    <state x="418" y="59" width="604" height="757" key="find.popup" timestamp="1601730792413">
+      <screen x="0" y="23" width="1440" height="827" />
     </state>
     <state x="418" y="39" width="604" height="822" key="find.popup/0.0.1440.900@0.0.1440.900" timestamp="1601381125221" />
+    <state x="418" y="59" width="604" height="757" key="find.popup/0.23.1440.827/-296.-2137.3840.2137@0.23.1440.827" timestamp="1601730792413" />
     <state x="418" y="59" width="604" height="758" key="find.popup/0.23.1440.829@0.23.1440.829" timestamp="1601555302186" />
+    <state x="418" y="59" width="604" height="760" key="find.popup/0.23.1440.831@0.23.1440.831" timestamp="1601630461980" />
   </component>
 </project>

@@ -5,6 +5,35 @@ $(document).ready(function(){
     $('#dailyTrendActor').hide();
     $('#reseachResult').hide();
 
+    var page = 2;
+    var lastHeight;
+    var category;
+
+
+
+    // Detecte le bas de page et affiche plus d'élèments
+    $(window).scroll(function(){
+        if( ($(window).scrollTop() + $(window).height()) > ($(document).height() - 500)){
+            if ($(document).height() != lastHeight){
+                lastHeight = $(document).height();
+                $.get(
+                    'requete.php',
+                    {
+                        pageSelected : page,
+                        categorySelected : category
+                    },
+                    function(data){
+                        $('#result').append(data);
+                    },
+                    'html'
+                );
+                page++;
+            }
+        }
+    });
+
+
+
     // récupère les tendances du jour au lancement du site
     $.get(
         'requete.php',
@@ -80,52 +109,43 @@ $(document).ready(function(){
 
     $('.nav').click(function(){
 
-        if($(this).attr('id') == 'movie'){
-            $('#dailyTrendMovie').show();
-            $('#dailyTrendTv').hide();
-            $('#dailyTrendAll').hide();
-            $('#dailyTrendActor').hide();
-            $('#reseachResult').hide();
-        }
-        if ($(this).attr('id') == 'all'){
-            $('#dailyTrendTv').hide();
-            $('#dailyTrendMovie').hide();
-            $('#dailyTrendActor').hide();
-            $('#dailyTrendAll').show();
-            $('#reseachResult').hide();
-        }
-        if($(this).attr('id') == 'actor'){
-            $('#dailyTrendTv').hide();
-            $('#dailyTrendMovie').hide();
-            $('#dailyTrendAll').hide();
-            $('#dailyTrendActor').show();
-            $('#reseachResult').hide();
-        }
-        if($(this).attr('id') == 'tv'){
-            $('#dailyTrendTv').show();
-            $('#dailyTrendActor').hide();
-            $('#dailyTrendMovie').hide();
-            $('#dailyTrendAll').hide();
-            $('#reseachResult').hide();
-        }
-
+        category = $(this).attr('id');
         $.get(
             'requete.php',  // Fichier cible côté serveur
             {
-                choose : $(this).attr('id')// Récupération de la valeur saisie dans le formulaire html
+                choose : category // Récupération de la valeur saisie dans le formulaire html
             },
             function(data){ // Fonction callback avec les données renvoyées par jQuery en paramètre
                 $('#result').html(data);
             },
             'html' // Format des données reçues
         );
+
+        $('#dailyTrendTv').hide();
+        $('#dailyTrendMovie').hide();
+        $('#dailyTrendActor').hide();
+        $('#dailyTrendAll').hide();
+        $('#reseachResult').hide();
+
+
+        if (category == 'all'){
+            $('#dailyTrendAll').show();
+        }
+        if(category == 'movie'){
+            $('#dailyTrendMovie').show();
+        }
+        if(category == 'actor'){
+            $('#dailyTrendActor').show();
+        }
+        if( category  == 'tv') {
+            $('#dailyTrendTv').show();
+        }
     });
 
 
 
     $(document).on('click', '.wrapProduct', function(){
 
-        alert($(this).attr('class'));
         $.post(
             'requete.php',               // Fichier cible côté serveur
             {
@@ -146,5 +166,8 @@ $(document).ready(function(){
             'html'
         );
     });
+
+
+
 
 });

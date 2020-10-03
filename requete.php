@@ -141,7 +141,6 @@ if (isset($_POST['research'])){
             }
             else{
                 echo '<img class="poster" src="http://image.tmdb.org/t/p/w500'.($responseJson['results'][$i]['poster_path']).'" alt="test">';
-
             }
             echo '<p class="movieTitle">'.$responseJson['results'][$i]['original_title'].'</p>';
             echo '<p class="movieTitle">'.$responseJson['results'][$i]['name'].'</p>';
@@ -233,5 +232,69 @@ if (isset($_POST['selectedId'])){
         echo '<img class="TvItem" id="poster_path" src="http://image.tmdb.org/t/p/w500'.$responseJsonTv['poster_path'].'" alt="image">';
         echo '</div>';
     }
+}
+
+if(isset ($_GET['pageSelected'])){
+
+    // récupère les tendances du jour via l'API
+    $requestApi = 'https://api.themoviedb.org/3/trending/all/day?api_key=0d34be9b15e78c94a6d41f1872e62f86&page='.$_GET['pageSelected'].'';
+    $response = file_get_contents($requestApi);
+    $responseJson = json_decode($response, true);
+
+    // requête tendance avec paramètre de catégorie $_GET renvoie movie, actor ou Tv
+    $requestApiMovieTv = 'https://api.themoviedb.org/3/trending/' . $_GET['categorySelected'] . '/day?api_key=0d34be9b15e78c94a6d41f1872e62f86&page='.$_GET['pageSelected'].'';
+    $responseMovieTv = file_get_contents($requestApiMovieTv);
+    $responseJsonMovieTv = json_decode($responseMovieTv, true);
+
+    // Requête tendance pour les acteurs
+    $requestApiActor = 'https://api.themoviedb.org/3/person/popular?api_key=0d34be9b15e78c94a6d41f1872e62f86&page='.$_GET['pageSelected'].'';
+    $responseActor = file_get_contents($requestApiActor);
+    $responseJsonActor = json_decode($responseActor, true);
+
+
+
+
+    if($_GET[categorySelected] == 'movie'){
+        // Affiche toutes les tendances à l'écran
+        for($i=0; $i<count($responseJsonMovieTv['results']);$i++){
+            if ($responseJsonMovieTv['results'][$i]['poster_path'] != null){
+                $idMovie = $responseJsonMovieTv['results'][$i]['id'];
+                echo '<!--nouvelle page-->';
+                echo '<div class="wrapProduct movie" id="'.$idMovie.'">';
+                echo '<img class="poster  movie" src="http://image.tmdb.org/t/p/w500'.($responseJsonMovieTv['results'][$i]['poster_path']).'" alt="test">';
+                echo '<p class="movieTitle  movie">'.$responseJsonMovieTv['results'][$i]['original_title'].'</p>';
+                echo '</div>';
+            }
+        }
+
+    }
+    if($_GET[categorySelected] == 'tv'){
+        // Affiche toutes les tendances à l'écran
+        for($i=0; $i<count($responseJsonMovieTv['results']);$i++){
+            if ($responseJsonMovieTv['results'][$i]['poster_path'] != null){
+                $idTv = $responseJsonMovieTv['results'][$i]['id'];
+                echo '<div class="wrapProduct tv" id="'.$idTv.'">';
+                echo '<img class="poster tv" src="http://image.tmdb.org/t/p/w500'.($responseJsonMovieTv['results'][$i]['poster_path']).'" alt="test">';
+                echo '<p class="movieTitle tv">'.$responseJsonMovieTv['results'][$i]['original_name'].'</p>';
+                echo '</div>';
+            }
+        }
+
+    }
+    if($_GET[categorySelected] == 'actor'){
+        // Affiche toutes les tendances à l'écran
+        for ($i = 0; $i < count($responseJsonActor['results']); $i++) {
+            if ($responseJsonActor['results'][$i]['profile_path'] != null) {
+                $idActor = $responseJsonActor['results'][$i]['id'];
+                echo '<div class="wrapProduct actors" id="' . $idActor . '">';
+                echo '<img class="poster actors" src="http://image.tmdb.org/t/p/w500' . ($responseJsonActor['results'][$i]['profile_path']) . '" alt="test">';
+                echo '<p class="movieTitle actors" id="'.$i.'">' . $responseJsonActor['results'][$i]['name'] . '</p>';
+                echo '</div>';
+            }
+        }
+
+    }
+
+
 }
 
