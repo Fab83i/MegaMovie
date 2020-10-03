@@ -4,16 +4,18 @@ $(document).ready(function(){
     $('#dailyTrendTv').hide();
     $('#dailyTrendActor').hide();
     $('#reseachResult').hide();
+    $('#spinner').hide();
 
     var page = 2;
     var lastHeight;
     var category;
+    var clickItem =true;
 
 
 
     // Detecte le bas de page et affiche plus d'élèments
     $(window).scroll(function(){
-        if( ($(window).scrollTop() + $(window).height()) > ($(document).height() - 500)){
+        if( ($(window).scrollTop() + $(window).height()) > ($(document).height() - 500) && clickItem){
             if ($(document).height() != lastHeight){
                 lastHeight = $(document).height();
                 $.get(
@@ -51,6 +53,7 @@ $(document).ready(function(){
     *  click sur le bouton 'Go' pour éxécuter la requête de recherche
     */
     $('#submit').click(function(){
+        $('#spinner').show();
 
         $('div').remove('#dailyTrend');     // Supprime la div contenant le texte 'Tendance du jour' lors du click sur Go
         var researchParam = $('#search').val();
@@ -69,6 +72,7 @@ $(document).ready(function(){
                 $('#dailyTrendActor').hide();
                 $('#dailyTrendMovie').hide();
                 $('#dailyTrendAll').hide();
+                $('#spinner').hide();
                 document.getElementById('researchEnter').innerHTML= researchParam;
             },
             'html'
@@ -80,6 +84,7 @@ $(document).ready(function(){
     $(document).on('keypress',function(e) {
 
 
+        $('#spinner').show();
         if(e.which == 13) {
             var researchParam = $('#search').val();
             var inputParam = $('#search').val().replaceAll(' ','/');
@@ -98,6 +103,7 @@ $(document).ready(function(){
                     $('#dailyTrendAll').hide();
                     $('#reseachResult').show();
                     $('#search').val('');
+                    $('#spinner').hide();
                     document.getElementById('researchEnter').innerHTML= researchParam;
                 },
                 'html'        // Format des données reçues
@@ -109,6 +115,8 @@ $(document).ready(function(){
 
     $('.nav').click(function(){
 
+        $('#spinner').show();
+        clickItem = true;
         category = $(this).attr('id');
         $.get(
             'requete.php',  // Fichier cible côté serveur
@@ -117,6 +125,7 @@ $(document).ready(function(){
             },
             function(data){ // Fonction callback avec les données renvoyées par jQuery en paramètre
                 $('#result').html(data);
+                $('#spinner').hide();
             },
             'html' // Format des données reçues
         );
@@ -145,13 +154,15 @@ $(document).ready(function(){
 
 
     $(document).on('click', '.wrapProduct', function(){
+        $('#spinner').show();
+        clickItem = false;
 
         $.post(
             'requete.php',               // Fichier cible côté serveur
             {
                 selectedId : $(this).attr('id'),         // Variable passée en param pour la selection dans requete.php
                 selectedClass : $(this).attr('class'),
-                resultId : $(this).children('p').attr('id')
+                resultId : $(this).children('p').attr('id'),
             },
             function (data){               // fonction callback à effectuer au retour de la requête
                 $('#result').html(data);           // ajoute à la div #result l'html revenant de requete.php
@@ -162,6 +173,7 @@ $(document).ready(function(){
                 $('#dailyTrendMovie').hide();
                 $('#dailyTrendAll').hide();
                 $('#reseachResult').hide();
+                $('#spinner').hide();
             },
             'html'
         );
