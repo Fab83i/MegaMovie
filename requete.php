@@ -266,7 +266,6 @@ if(isset ($_GET['pageSelected'])){
                 echo '</div>';
             }
         }
-
     }
     if($_GET[categorySelected] == 'tv'){
         // Affiche toutes les tendances à l'écran
@@ -294,7 +293,5 @@ if(isset ($_GET['pageSelected'])){
         }
 
     }
-
-
 }
 
