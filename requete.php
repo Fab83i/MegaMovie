@@ -86,11 +86,6 @@ if (isset($_GET['launch'])){
 /*
  * Condition sur le clic d'une catégorie du menu. Afin d'afficher respectivement movies, TV ou Actors
  * Attention à la syntaxe, le nom d'un TV et d'un movie n'est pas exprimé sous le même attribut. original_title ou original_name.
- *
- *
- * UPDATE 02/10/2020
- * Séparation des quatre catégories pour plus de clarté. Vérification avec le $_GET pour choisir une catégorie.
- *
  * */
 
 if (isset($_GET['choose'])) {

@@ -83,11 +83,10 @@ $(document).ready(function(){
     */
     $(document).on('keypress',function(e) {
 
-
-        $('#spinner').show();
         if(e.which == 13) {
             var researchParam = $('#search').val();
             var inputParam = $('#search').val().replaceAll(' ','/');
+            $('#spinner').show();
 
             $.post(
                 'requete.php',  // Fichier cible côté serveur
