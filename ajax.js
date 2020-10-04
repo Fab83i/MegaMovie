@@ -5,6 +5,7 @@ $(document).ready(function(){
     $('#dailyTrendActor').hide();
     $('#reseachResult').hide();
     $('#spinner').hide();
+    $('#spinnerBottom').hide();
 
     var page = 2;
     var lastHeight;
@@ -16,6 +17,7 @@ $(document).ready(function(){
     // Detecte le bas de page et affiche plus d'élèments
     $(window).scroll(function(){
         if( ($(window).scrollTop() + $(window).height()) > ($(document).height() - 500) && clickItem){
+            $('#spinnerBottom').show();
             if ($(document).height() != lastHeight){
                 lastHeight = $(document).height();
                 $.get(
@@ -26,6 +28,7 @@ $(document).ready(function(){
                     },
                     function(data){
                         $('#result').append(data);
+                        $('#spinnerBottom').hide();
                     },
                     'html'
                 );
