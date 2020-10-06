@@ -4,6 +4,7 @@ $(document).ready(function(){
     $('#dailyTrendTv').hide();
     $('#dailyTrendActor').hide();
     $('#reseachResult').hide();
+    $('#isSelected').hide();
     $('#spinner').hide();
     $('#spinnerBottom').hide();
 
@@ -11,12 +12,13 @@ $(document).ready(function(){
     var lastHeight;
     var category;
     var clickItem =true;
+    var all = true;
 
 
 
     // Detecte le bas de page et affiche plus d'élèments
     $(window).scroll(function(){
-        if( ($(window).scrollTop() + $(window).height()) > ($(document).height() - 500) && clickItem){
+        if( ($(window).scrollTop() + $(window).height()) > ($(document).height() - 500) && clickItem && !all){
             $('#spinnerBottom').show();
             if ($(document).height() != lastHeight){
                 lastHeight = $(document).height();
@@ -73,6 +75,7 @@ $(document).ready(function(){
                 $('#reseachResult').show();
                 $('#dailyTrendTv').hide();
                 $('#dailyTrendActor').hide();
+                $('#isSelected').hide();
                 $('#dailyTrendMovie').hide();
                 $('#dailyTrendAll').hide();
                 $('#spinner').hide();
@@ -102,6 +105,7 @@ $(document).ready(function(){
                     $('#dailyTrendTv').hide();
                     $('#dailyTrendActor').hide();
                     $('#dailyTrendMovie').hide();
+                    $('#isSelected').hide();
                     $('#dailyTrendAll').hide();
                     $('#reseachResult').show();
                     $('#search').val('');
@@ -120,6 +124,13 @@ $(document).ready(function(){
         $('#spinner').show();
         clickItem = true;
         category = $(this).attr('id');
+        if(category == 'all'){
+            all = true;
+        }
+        else{
+            all = false;
+        }
+
         $.get(
             'requete.php',  // Fichier cible côté serveur
             {
@@ -137,6 +148,7 @@ $(document).ready(function(){
         $('#dailyTrendActor').hide();
         $('#dailyTrendAll').hide();
         $('#reseachResult').hide();
+        $('#isSelected').hide();
 
 
         if (category == 'all'){
@@ -167,9 +179,10 @@ $(document).ready(function(){
                 resultId : $(this).children('p').attr('id'),
             },
             function (data){               // fonction callback à effectuer au retour de la requête
-                $('#result').html(data);           // ajoute à la div #result l'html revenant de requete.php
-                $('div').remove('#dailyTrend');         // Supprime la div contenant le texte 'Tendance du jour' lors keypress 13
+                $('#result').html(data);
+                $('div').remove('#dailyTrend');
                 $('html,body').animate({scrollTop: 0}, 'slow');
+                $('#isSelected').show();
                 $('#dailyTrendTv').hide();
                 $('#dailyTrendActor').hide();
                 $('#dailyTrendMovie').hide();

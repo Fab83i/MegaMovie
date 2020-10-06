@@ -32,7 +32,7 @@ $responseChoose = file_get_contents($requestApiChoose);
 $responseJsonChoose = json_decode($responseChoose, true);
 
 // Requête pour les acteurs populaires
-$requestApiActor = 'https://api.themoviedb.org/3/person/popular?api_key=0d34be9b15e78c94a6d41f1872e62f86';
+$requestApiActor = 'https://api.themoviedb.org/3/person/popular?api_key=0d34be9b15e78c94a6d41f1872e62f86&page='.$_GET['pageSelected'].'';
 $responseActor = file_get_contents($requestApiActor);
 $responseJsonActor = json_decode($responseActor, true);
 
@@ -156,7 +156,7 @@ if (isset($_POST['research'])){
         if ($responseJson['results'][$i]['poster_path'] != null || $responseJson['results'][$i]['profile_path']  != null){
             $idItem = $responseJson['results'][$i]['id'];
             echo '<div class="wrapProduct" id="'.$idItem.'">';
-            if($responseJson['results'][$i]['poster_path'] == null){ // On vérifie si l'affiche est nulle pour afficher le celle correspondante
+            if($responseJson['results'][$i]['poster_path'] == null){ // On vérifie si l'affiche est nulle pour afficher celle correspondante
                 echo '<img class="poster actors" src="http://image.tmdb.org/t/p/w500'.($responseJson['results'][$i]['profile_path']).'" alt="test">';
             }
             else{
@@ -188,23 +188,27 @@ if (isset($_POST['selectedId'])){
     // affichage des infos movie
     if($responseJsonTv['episode_run_time'] == null && !isset($_POST['resultId'])){
         echo '<div id="chosenProduct">';
+        echo '<div id="divLeft" style="width: 50%">';
+        echo '<img class="movieItem" id="poster_path" src="http://image.tmdb.org/t/p/w500'.$responseJsonMovieId['poster_path'].'" alt="image">';
+        echo '</div>';
+        echo '<div id="divRight" style="width: 50%; text-align: center; padding-top: 15%">';
         echo '<p class="movieItem" id="chosenTitle">'.$responseJsonMovieId['original_title'].'</p>';
         echo '<p class="movieItem" id="average_id"> <img id="star_id" src="https://perekchira.com/wp-content/uploads/2018/03/Etoile.png" alt="star">'.$responseJsonMovieId['vote_average'].' / 10</p>';
         echo '<p class="movieItem" id="chosenDesc"><span style="font-style: italic; font-weight: bold; font-size: 20px">Synopsis : <br /><br /></span>'.$responseJsonMovieId['overview'].'</p>';
-        echo '<img class="movieItem" id="poster_path" src="http://image.tmdb.org/t/p/w500'.$responseJsonMovieId['poster_path'].'" alt="image">';
+        echo '</div>';
         echo '</div>';
     }
     // affichage des infos actors
     if (isset($_POST['resultId'])){
 
-        $content  = '<div style="display: flex; flex-wrap: wrap; justify-content: space-around; padding-bottom: 30px;margin-bottom: 30px; margin-top: 30px; border-bottom: 8px solid">';
+        $content  = '<div style="display: flex; flex-wrap: wrap; justify-content: space-around; padding-bottom: 30px;margin-bottom: 30px; margin-top: 30px; border-bottom: 8px solid; width: 100%">';
         $content .= '<div id="divLeft">';
         $content .= '<img class="poster" src="http://image.tmdb.org/t/p/w500'.$responseJsonSelectedActor['profile_path'].'" alt="test">';
         $content .= '</div>';
-        $content .= '<div id="divRight" style="width: 50%">';
-        $content .= '<table style="margin: 20px 20px;color: white; border: 3px solid white; padding: 15px; font-size: 20px"><tr class="actor_content"><td style="width: 150px">Name : </td><td>' . $responseJsonSelectedActor['name'] . '</td></tr><tr class="actor_content"><td style="width: 150px">Birth date : </td><td>'.$responseJsonSelectedActor['birthday'].'</td></tr><tr class="actor_content"><td style="width: 150px">Biography : </td><td>'.$responseJsonSelectedActor['biography'].'</td></tr></table>';
+        $content .= '<div id="divRight" style="width: 50%; text-align: center">';
+        $content .= '<table style="margin-top: 30%;color: white; border: 3px solid white; padding: 15px; font-size: 20px"><tr class="actor_content"><td style="width: 150px; padding: 10px">Name : </td><td style="padding: 10px">' . $responseJsonSelectedActor['name'] . '</td></tr><tr class="actor_content"><td style="width: 150px; padding: 10px">Birth date : </td><td style="padding: 10px">'.$responseJsonSelectedActor['birthday'].'</td></tr><tr class="actor_content"><td style="width: 150px; padding: 10px">Popularity : </td><td style="padding: 10px">'.$responseJsonSelectedActor['popularity'].'</td></tr></table>';
         $content .= '</div>';
-        $content .= '</div>';
+        $content .= '</div><br />';
         // Connu pour avoir jouer dans les films suivants
         for($i = 0 ; $i < count($responseJsonActor['results'][$_POST['resultId']]['known_for']) ; $i++){
             if ($responseJsonActor['results'][$_POST['resultId']]['known_for'][$i]['poster_path'] != null){
@@ -222,18 +226,21 @@ if (isset($_POST['selectedId'])){
     if($_POST['resultId'] == null && $responseJsonTv['episode_run_time'] != null ){
 
         echo '<div id="chosenProduct">';
+        echo '<div id="divLeft" style="width: 50%">';
+        echo '<img class="TvItem" id="poster_path" src="http://image.tmdb.org/t/p/w500'.$responseJsonTv['poster_path'].'" alt="image">';
+        echo '</div>';
+        echo '<div id="divRight" style="width: 50%; text-align: center; padding-top: 15%">';
         echo '<p class="TvItem" id="chosenTitle">'.$responseJsonTv['original_name'].'</p>';
         echo '<p class="TvItem" id="average_id"> <img id="star_id" src="https://perekchira.com/wp-content/uploads/2018/03/Etoile.png" alt="star">'.$responseJsonTv['vote_average'].' / 10</p>';
         echo '<p class="TvItem" id="chosenDesc"><span style="font-style: italic; font-weight: bold; font-size: 20px">Synopsis : <br /><br /></span>'.$responseJsonTv['overview'].'</p>';
-        echo '<img class="TvItem" id="poster_path" src="http://image.tmdb.org/t/p/w500'.$responseJsonTv['poster_path'].'" alt="image">';
+        echo '</div>';
         echo '</div>';
     }
 }
 
 if(isset ($_GET['pageSelected'])){
 
-    if($_GET[categorySelected] == 'movie'){
-
+    if($_GET['categorySelected'] == 'movie'){
         // Affiche toutes les tendances à l'écran
         for($i=0; $i<count($responseJsonMovieTv['results']);$i++){
             if ($responseJsonMovieTv['results'][$i]['poster_path'] != null){
@@ -246,8 +253,7 @@ if(isset ($_GET['pageSelected'])){
             }
         }
     }
-    if($_GET[categorySelected] == 'tv'){
-
+    if($_GET['categorySelected'] == 'tv'){
         // Affiche toutes les tendances à l'écran
         for($i=0; $i<count($responseJsonMovieTv['results']);$i++){
             if ($responseJsonMovieTv['results'][$i]['poster_path'] != null){
@@ -260,8 +266,7 @@ if(isset ($_GET['pageSelected'])){
         }
 
     }
-    if($_GET[categorySelected] == 'actor'){
-
+    if($_GET['categorySelected'] == 'actor'){
         // Affiche toutes les tendances à l'écran
         for ($i = 0; $i < count($responseJsonActor['results']); $i++) {
             if ($responseJsonActor['results'][$i]['profile_path'] != null) {

@@ -19,10 +19,12 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1d1ac4e5-3ad2-48cc-8715-6b01c78f73ec" name="Default Changelist" comment="update légère">
+    <list default="true" id="1d1ac4e5-3ad2-48cc-8715-6b01c78f73ec" name="Default Changelist" comment="rajout spinner bas de page">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ajax.js" beforeDir="false" afterPath="$PROJECT_DIR$/ajax.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/requete.php" beforeDir="false" afterPath="$PROJECT_DIR$/requete.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/style.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -90,7 +92,9 @@
       <workItem from="1601630135280" duration="6295000" />
       <workItem from="1601642769609" duration="1261000" />
       <workItem from="1601727039077" duration="10200000" />
-      <workItem from="1601761584259" duration="4400000" />
+      <workItem from="1601761584259" duration="4495000" />
+      <workItem from="1601812049022" duration="3117000" />
+      <workItem from="1601826828254" duration="8071000" />
     </task>
     <task id="LOCAL-00001" summary="Modification de la section research">
       <created>1601557914846</created>
@@ -148,7 +152,14 @@
       <option name="project" value="LOCAL" />
       <updated>1601767327944</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="rajout spinner bas de page">
+      <created>1601803602935</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1601803602935</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -174,7 +185,8 @@
     <MESSAGE value="Correction des bugs et ajout de l'affichage ajax des pages suivantes" />
     <MESSAGE value="mise à jour de la barre de navigation, refonte des couleurs, ajout d'un spinner et organisation de la page requête" />
     <MESSAGE value="update légère" />
-    <option name="LAST_COMMIT_MESSAGE" value="update légère" />
+    <MESSAGE value="rajout spinner bas de page" />
+    <option name="LAST_COMMIT_MESSAGE" value="rajout spinner bas de page" />
   </component>
   <component name="WindowStateProjectService">
     <state x="593" y="340" key="Github.ShareDialog" timestamp="1601554531528">
@@ -189,10 +201,11 @@
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state x="539" y="380" key="NewPhpFileDialog/0.0.1440.900@0.0.1440.900" timestamp="1601036086394" />
-    <state x="320" y="166" key="Vcs.Push.Dialog.v2" timestamp="1601767333653">
+    <state x="320" y="166" key="Vcs.Push.Dialog.v2" timestamp="1601803607853">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state x="320" y="166" key="Vcs.Push.Dialog.v2/0.0.1440.900/-296.-2160.3840.2160@0.0.1440.900" timestamp="1601767333653" />
+    <state x="320" y="166" key="Vcs.Push.Dialog.v2/0.0.1440.900@0.0.1440.900" timestamp="1601803607853" />
     <state x="320" y="176" key="Vcs.Push.Dialog.v2/0.23.1440.827/-296.-2137.3840.2137@0.23.1440.827" timestamp="1601735848269" />
     <state x="320" y="176" key="Vcs.Push.Dialog.v2/0.23.1440.827@0.23.1440.827" timestamp="1601566491078" />
     <state x="320" y="176" key="Vcs.Push.Dialog.v2/0.23.1440.828@0.23.1440.828" timestamp="1601557933699" />
